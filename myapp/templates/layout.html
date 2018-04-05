@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load staticfiles %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/">
+    <link rel="icon" type="image/x-icon" href="{% static 'myngapp/dist/favicon.ico' %}">
+    <title>
+        {% block title %}     {% endblock title %}
+    </title>
+
+    {% block css %}
+        {#        CSS HERE     #}
+    {% endblock css %}
+</head>
+
+
+<body>
+    {% block content %}
+        {#    Content Here #}
+    {% endblock content %}
+
+    {% block js %}
+        {#    JS Here#}
+    {% endblock js %}
+</body>
+</html>

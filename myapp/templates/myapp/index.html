@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>MyApp</title>
-</head>
-<body>
-    In MyApp
-</body>
-</html>
+{% extends 'layout.html' %}
+{% load staticfiles %}
+{% block title %} Welcome to ConnectIt {% endblock title %}
+
+{% block css %}
+
+{% endblock css %}
+
+{% block content %}
+
+    {#    Angular Comes Here #}
+    <app-root></app-root>
+
+{% endblock content %}
+
+
+{% block js %}
+    <script type="text/javascript" src="{% static 'myngapp/dist/inline.bundle.js' %}"></script>
+    <script type="text/javascript" src="{% static 'myngapp/dist/polyfills.bundle.js' %}"></script>
+    <script type="text/javascript" src="{% static 'myngapp/dist/styles.bundle.js' %}"></script>
+    <script type="text/javascript" src="{% static 'myngapp/dist/vendor.bundle.js' %}"></script>
+    <script type="text/javascript" src="{% static 'myngapp/dist/main.bundle.js' %}"></script>
+{% endblock js %}
