@@ -1,5 +1,5 @@
 {
-  "compileOnSave": false,
+  "compileOnSave": true,
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
@@ -14,6 +14,18 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "baseUrl": "src",
+    "paths": {
+      "@guards/*": [
+        "app/__guards/*"
+      ],
+      "@services/*": [
+        "app/__services/*"
+      ],
+      "@env/*": [
+        "environments/*"
+      ]
+    }
   }
 }
