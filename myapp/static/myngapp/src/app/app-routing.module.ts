@@ -13,6 +13,10 @@ export const APPROUTES: Routes = [
         canActivate: [BouncerGuard], 
     },
     {
+        path: 'dashboard', 
+        component: UserComponent, 
+    },
+    {
         path: '', 
         component: AuthComponent,
         children: [
@@ -36,7 +40,7 @@ export const APPROUTES: Routes = [
 @NgModule({
     imports: [
         RouterModule.forRoot(APPROUTES,
-            { enableTracing: true }
+            { enableTracing: false }
         )
     ],
     exports: [
