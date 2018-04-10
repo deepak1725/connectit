@@ -3,7 +3,8 @@ from django.views.generic import TemplateView,View
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 import requests
-
+from django.contrib.auth.models import User
+from .models import SocialAuth
 
 class IndexView(LoginRequiredMixin, TemplateView):
     template_name = "myapp/index.html"
@@ -52,10 +53,45 @@ class AuthView(View):
                     userObj = userObj.json()
                     # userUrl = userObj['user_id']
 
+                    myUserObj = {
+                        "userModel" : {
+                            "email": userObj["email"],
+                            "username": userObj["display_name"],
+                            "first_name": userObj["name"],
+                            "is_active": userObj["email_verified"],
+                        },
+                        "socialModel" : {
+                            "scope": r["scope"],
+                            "refresh_token": r["refresh_token"],
+                            "access_token": r["access_token"],
+                            "expires_in": r["expires_in"],
+
+
+                            "email_notifications": userObj["notifications"]["email"],
+                            "auth_id": userObj["_id"],
+                            "updated_at": userObj["updated_at"],
+                            "created_at": userObj["created_at"]
+                        }
+
+                    }
+                    self.manageUser(myUserObj)
                     # user = requests.get(url, headers=headers)
                     print(userObj)
 
         return HttpResponse("GET")
+
+
+    def manageUser(self, myUserObj):
+        user = User.objects.filter(email__exact= myUserObj["userModel"]["email"]).first()
+
+        if not user:
+            user = User.objects.create(**myUserObj["userModel"])
+
+
+        socialUser = SocialAuth.objects.filter(user__exact=user)
+        if not socialUser:
+            socialUser = SocialAuth.objects.create(user=user, **myUserObj["socialModel"])
+        return
 
     def post(self, request):
         print("In Post")
