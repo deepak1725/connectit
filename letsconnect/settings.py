@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'social_django',
+    'social_core',
 ]
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.twitch.TwitchOAuth2',
@@ -131,3 +132,18 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'index'
 SOCIAL_AUTH_TWITCH_KEY = 'hn9wdfmenh2m4g0d1zwenonvq4yexi'
 SOCIAL_AUTH_TWITCH_SECRET = 'xhs8ke9ocnbnvbtd6zcm1wguya00uw'
+SOCIAL_AUTH_TWITCH_SCOPE = ['openid']
+SOCIAL_AUTH_STATE_PARAMETER = False
+SOCIAL_AUTH_REDIRECT_STATE = False
+STATE_PARAMETER = False
+REDIRECT_STATE = False
+# SOCIAL_AUTH_TWITCH_PIPELINE = (
+#     'social_core.pipeline.social_auth.social_details',
+#     'social_core.pipeline.social_auth.social_uid',
+#     'social_core.pipeline.social_auth.auth_allowed',
+#     'myapp.pipeline.load_user',
+#     'social_core.pipeline.social_auth.social_user',
+#     'social_core.pipeline.social_auth.associate_user',
+#     'social_core.pipeline.social_auth.load_extra_data',
+#     'social_core.pipeline.user.user_details',
+# )
