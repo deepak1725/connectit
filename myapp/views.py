@@ -6,6 +6,7 @@ import requests
 from django.contrib.auth.models import User
 from .models import SocialAuth
 
+
 class IndexView(LoginRequiredMixin, TemplateView):
     template_name = "myapp/index.html"
 
@@ -36,16 +37,15 @@ class AuthView(View):
             }
             accessTokenObj = requests.post('https://id.twitch.tv/oauth2/token', data=payload)
             # print("Json")
-            print(accessTokenObj.json())
 
             if accessTokenObj.status_code == 200:
-                #Getting status of Token and UserId
+                # Getting status of Token and UserId
 
                 accessTokenObj = accessTokenObj.json()
                 url = 'https://api.twitch.tv/kraken/user'
                 headers = {
                     'Accept': 'application/vnd.twitchtv.v5+json',
-                    'Authorization': "OAuth {}".format(r['access_token']),
+                    'Authorization': "OAuth {}".format(accessTokenObj['access_token']),
                     'Client-ID': "hn9wdfmenh2m4g0d1zwenonvq4yexi",
                 }
                 userObj = requests.get(url, headers=headers)
@@ -64,7 +64,7 @@ class AuthView(View):
                         },
 
                         "socialModel" : {
-                            "scope": r["scope"],
+                            "scope": accessTokenObj["scope"],
                             "refresh_token": accessTokenObj["refresh_token"],
                             "access_token": accessTokenObj["access_token"],
                             "expires_in": accessTokenObj["expires_in"],
@@ -93,6 +93,7 @@ class AuthView(View):
         if not socialUser:
             socialUser = SocialAuth.objects.create(user=user, **myUserObj["socialModel"])
         return
+
 
     def post(self, request):
         print("In Post")

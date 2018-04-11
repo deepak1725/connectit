@@ -14,3 +14,4 @@ class SocialAuth(models.Model):
     email_notifications = models.BooleanField()
     created_at = models.DateTimeField(null=False)
     updated_at = models.DateTimeField(null=False)
+
