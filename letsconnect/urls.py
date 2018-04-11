@@ -20,7 +20,7 @@ from myapp.views import IndexView, LoginView, AuthView
 urlpatterns = [
     url('', include('social_django.urls', namespace='social')),
     url(r'^admin/', admin.site.urls),
-    url(r'^$', IndexView.as_view(), name="index"),
+    url(r'^complete/twitch/$', IndexView.as_view(), name="index"),
     url(r'^login/$', LoginView.as_view(), name="login"),
     url(r'^auth/$', AuthView.as_view(), name="auth"),
 ]

@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'social_django',
 ]
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.open_id.OpenIdAuth',
     'social_core.backends.twitch.TwitchOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
@@ -54,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware'
 ]
 
 ROOT_URLCONF = 'letsconnect.urls'
@@ -129,3 +129,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'index'
+SOCIAL_AUTH_TWITCH_KEY = 'hn9wdfmenh2m4g0d1zwenonvq4yexi'
+SOCIAL_AUTH_TWITCH_SECRET = 'xhs8ke9ocnbnvbtd6zcm1wguya00uw'

@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from .models import SocialAuth
 
 
-class IndexView(LoginRequiredMixin, TemplateView):
+class IndexView(TemplateView):
     template_name = "myapp/index.html"
 
 
