@@ -25,7 +25,7 @@ SECRET_KEY = 'c=p(%yei_hhz+ry002ptd#1dssimsyog^q+e8uh_l9&jyef+zy'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'social_django',
-    'social_core',
 ]
 AUTHENTICATION_BACKENDS = (
+    'social_core.backends.open_id.OpenIdAuth',
     'social_core.backends.twitch.TwitchOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
@@ -54,7 +54,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'social_django.middleware.SocialAuthExceptionMiddleware'
 ]
 
 ROOT_URLCONF = 'letsconnect.urls'
@@ -70,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
             ],
@@ -130,20 +130,21 @@ USE_TZ = True
 STATIC_URL = '/static/'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'index'
+
 SOCIAL_AUTH_TWITCH_KEY = 'hn9wdfmenh2m4g0d1zwenonvq4yexi'
 SOCIAL_AUTH_TWITCH_SECRET = 'xhs8ke9ocnbnvbtd6zcm1wguya00uw'
-SOCIAL_AUTH_TWITCH_SCOPE = ['openid']
-SOCIAL_AUTH_STATE_PARAMETER = False
-SOCIAL_AUTH_REDIRECT_STATE = False
-STATE_PARAMETER = False
-REDIRECT_STATE = False
+# SOCIAL_AUTH_TWITCH_SCOPE = ['openid']
+# SOCIAL_AUTH_RAISE_EXCEPTIONS = False
+#
+#
 # SOCIAL_AUTH_TWITCH_PIPELINE = (
 #     'social_core.pipeline.social_auth.social_details',
 #     'social_core.pipeline.social_auth.social_uid',
 #     'social_core.pipeline.social_auth.auth_allowed',
-#     'myapp.pipeline.load_user',
 #     'social_core.pipeline.social_auth.social_user',
 #     'social_core.pipeline.social_auth.associate_user',
-#     'social_core.pipeline.social_auth.load_extra_data',
+#     # 'social_core.pipeline.social_auth.load_extra_data',
 #     'social_core.pipeline.user.user_details',
 # )
+#
+# SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['local_password',]

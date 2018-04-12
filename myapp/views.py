@@ -5,28 +5,17 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 import requests
 from django.contrib.auth.models import User
 from .models import SocialAuth
-import myapp.monkey as monk
-from django.contrib.sessions.models import Session
+from social_core.backends.twitch import BaseOAuth2
+
+
+
+
 
 class IndexView(TemplateView):
-    def __init__(self):
-        super(IndexView, self).__init__()
-        print("In Index View")
-        monk.start()
-
     template_name = "myapp/index.html"
 
 
 class LoginView(TemplateView):
-    # BACKENDS = {
-    #     'social_auth.backends.': 'social_core.backends.facebook.FacebookOAuth2'
-    # }
-
-    def __init__(self):
-        super(LoginView, self).__init__()
-
-        monk.start()
-
 
     template_name = "myapp/login.html"
 
@@ -92,7 +81,6 @@ class AuthView(View):
 
                     }
                     self.manageUser(myUserObj)
-                    # user = requests.get(url, headers=headers)
                     print(userObj)
 
         return HttpResponse("GET")
@@ -114,3 +102,6 @@ class AuthView(View):
     def post(self, request):
         print("In Post")
         return HttpResponse("Post")
+
+
+
