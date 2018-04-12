@@ -15,12 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from myapp.views import IndexView, LoginView, AuthView
+from myapp.views import IndexView, LoginView
 
 urlpatterns = [
     url('', include('social_django.urls', namespace='social')),
     url(r'^admin/', admin.site.urls),
-    url(r'^complete/twitch/', include('social_django.urls', namespace='index')),
+    url(r'^index/', IndexView.as_view(), name='index'),
     url(r'^login/$', LoginView.as_view(), name="login"),
-    url(r'^auth/$', AuthView.as_view(), name="auth"),
+    # url(r'^auth/$', AuthView.as_view(), name="auth"),
 ]

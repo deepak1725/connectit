@@ -129,22 +129,24 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'index'
+
+LOGIN_REDIRECT_URL = '/index'
+
+
+SOCIAL_AUTH_TWITCH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.mail.mail_validation',
+    'social_core.pipeline.social_auth.associate_by_email',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)
 
 SOCIAL_AUTH_TWITCH_KEY = 'hn9wdfmenh2m4g0d1zwenonvq4yexi'
 SOCIAL_AUTH_TWITCH_SECRET = 'xhs8ke9ocnbnvbtd6zcm1wguya00uw'
 # SOCIAL_AUTH_TWITCH_SCOPE = ['openid']
-# SOCIAL_AUTH_RAISE_EXCEPTIONS = False
-#
-#
-# SOCIAL_AUTH_TWITCH_PIPELINE = (
-#     'social_core.pipeline.social_auth.social_details',
-#     'social_core.pipeline.social_auth.social_uid',
-#     'social_core.pipeline.social_auth.auth_allowed',
-#     'social_core.pipeline.social_auth.social_user',
-#     'social_core.pipeline.social_auth.associate_user',
-#     # 'social_core.pipeline.social_auth.load_extra_data',
-#     'social_core.pipeline.user.user_details',
-# )
-#
-# SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['local_password',]
