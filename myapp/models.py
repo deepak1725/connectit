@@ -5,13 +5,8 @@ from django.contrib.auth.models import User
 
 class SocialAuth(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
-    access_token = models.CharField(max_length=50, null=False)
-    expires_in = models.CharField(max_length=50, null=False)
-    refresh_token = models.CharField(max_length=50, null=False)
-    scope = models.CharField(max_length=50, null=False)
-
-    auth_id = models.CharField(max_length=50, null=False)
+    mobile = models.IntegerField(null=True, blank=True)
     email_notifications = models.BooleanField()
-    created_at = models.DateTimeField(null=False)
-    updated_at = models.DateTimeField(null=False)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
