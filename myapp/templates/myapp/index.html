@@ -7,17 +7,17 @@
 {% endblock css %}
 
 {% block content %}
-
+<base href="/">
     {#    Angular Comes Here #}
    In Index
-{{ request.user.email }}
+    <app-root> </app-root>
 {% endblock content %}
 
-{##}
-{#{% block js %}#}
-{#    <script type="text/javascript" src="{% static 'myngapp/dist/inline.bundle.js' %}"></script>#}
-{#    <script type="text/javascript" src="{% static 'myngapp/dist/polyfills.bundle.js' %}"></script>#}
-{#    <script type="text/javascript" src="{% static 'myngapp/dist/styles.bundle.js' %}"></script>#}
-{#    <script type="text/javascript" src="{% static 'myngapp/dist/vendor.bundle.js' %}"></script>#}
-{#    <script type="text/javascript" src="{% static 'myngapp/dist/main.bundle.js' %}"></script>#}
-{#{% endblock js %}#}
+
+{% block js %}
+    <script type="text/javascript" src="{% static 'myngapp/dist/inline.bundle.js' %}"></script>
+    <script type="text/javascript" src="{% static 'myngapp/dist/polyfills.bundle.js' %}"></script>
+    <script type="text/javascript" src="{% static 'myngapp/dist/styles.bundle.js' %}"></script>
+    <script type="text/javascript" src="{% static 'myngapp/dist/vendor.bundle.js' %}"></script>
+    <script type="text/javascript" src="{% static 'myngapp/dist/main.bundle.js' %}"></script>
+{% endblock js %}

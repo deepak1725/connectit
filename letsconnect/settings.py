@@ -145,6 +145,8 @@ SOCIAL_AUTH_TWITCH_PIPELINE = (
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
+    'myapp.pipeline.show_user_details',
+
 )
 
 SOCIAL_AUTH_TWITCH_KEY = 'hn9wdfmenh2m4g0d1zwenonvq4yexi'
