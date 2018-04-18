@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'social_django',
+    'django_cron',
 ]
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.open_id.OpenIdAuth',
@@ -152,3 +153,9 @@ SOCIAL_AUTH_TWITCH_PIPELINE = (
 SOCIAL_AUTH_TWITCH_KEY = 'hn9wdfmenh2m4g0d1zwenonvq4yexi'
 SOCIAL_AUTH_TWITCH_SECRET = 'xhs8ke9ocnbnvbtd6zcm1wguya00uw'
 # SOCIAL_AUTH_TWITCH_SCOPE = ['openid']
+
+ALLOW_PARALLEL_RUNS = True
+CRON_CLASSES = [
+    "myapp.cron.OnlineStreamCheckCronJob",
+    "myapp.cron.NewFollowerCheckCronJob",
+]
