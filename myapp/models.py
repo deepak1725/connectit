@@ -8,7 +8,7 @@ class SocialAuth(models.Model):
     mobile = models.IntegerField(null=True, blank=True)
     email_notifications = models.BooleanField()
     text_notifications = models.BooleanField(default=False)
-    last_following_user = models.CharField(max_length=50)
+    followers = models.TextField(default=[])
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -30,3 +30,5 @@ class EmailNotifications(models.Model):
 
     def __str__(self):
         return self.subject
+
+
