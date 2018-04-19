@@ -159,3 +159,10 @@ CRON_CLASSES = [
     "myapp.cron.OnlineStreamCheckCronJob",
     "myapp.cron.NewFollowerCheckCronJob",
 ]
+DEFAULT_FROM_EMAIL = 'admin@connectit.com'
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'sharma1725'
+EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_KEY')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
