@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from myapp.views import IndexView, LoginView,UserDetailsView, WebhookDataReturnView
+from myapp.views import IndexView, LoginView,UserDetailsView, FollowerCallbackView, StreamCallbackView
 
 urlpatterns = [
     url('', include('social_django.urls', namespace='social')),
@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^index/', IndexView.as_view(), name='index'),
     url(r'^login/$', LoginView.as_view(), name="login"),
     url(r'^user-details/$', UserDetailsView.as_view(), name="details"),
-    url(r'^webhook/$', WebhookDataReturnView.as_view(), name="webhook"),
+    url(r'^callback/follower/$', FollowerCallbackView.as_view(), name="follower"),
+    url(r'^callback/stream/$', StreamCallbackView.as_view(), name="stream"),
 ]
