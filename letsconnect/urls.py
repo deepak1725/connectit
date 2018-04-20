@@ -20,7 +20,7 @@ from myapp.views import IndexView, LoginView,UserDetailsView, FollowerCallbackVi
 urlpatterns = [
     url('', include('social_django.urls', namespace='social')),
     url(r'^admin/', admin.site.urls),
-    url(r'^index/', IndexView.as_view(), name='index'),
+    url(r'^index/$', IndexView.as_view(), name='index'),
     url(r'^login/$', LoginView.as_view(), name="login"),
     url(r'^user-details/$', UserDetailsView.as_view(), name="details"),
     url(r'^callback/follower/$', FollowerCallbackView.as_view(), name="follower"),
