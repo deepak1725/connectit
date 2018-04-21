@@ -94,7 +94,7 @@ class UserDetailsView(LoginRequiredMixin, FormView):
     def get_success_url(self, **kwargs):
         if self.request.session.get('from_social_auth', None):
             return reverse('social:complete', args = ("twitch", ))
-        return reverse('index')
+        return reverse('myapp:index')
 
     def get_initial(self):
         context = super(UserDetailsView, self).get_initial()

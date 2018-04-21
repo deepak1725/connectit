@@ -14,4 +14,4 @@ def show_user_details(strategy, backend, request, details, *args, **kwargs):
         login(request,user,'django.contrib.auth.backends.ModelBackend')
     exists_in_auth = SocialAuth.objects.filter(user_id=request.user.id).exists()
     if not exists_in_auth:
-        return redirect("details")
+        return redirect("myapp:details")
