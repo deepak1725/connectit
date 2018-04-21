@@ -10,7 +10,9 @@ import { Component, OnInit } from '@angular/core';
 export class DashboardComponent implements OnInit {
 
   userData:any;
-  followNotification = 2
+
+  // DB TYPES
+  followNotification = 2 
   streamNotification = 1
 
   constructor(public userService: UserService) { }
@@ -22,8 +24,13 @@ export class DashboardComponent implements OnInit {
   getUserDetails = () => {
     this.userService.getAllUsers().subscribe(
       (response) => {
-        console.log(response);
         this.userData = response.data;
+        
+      },
+      (error) => {
+        console.log("An Error has occurured while assesing records from server, Please check are you authorised to make that request?");
+        // console.log(error.json())
+        
       }
     )
   }

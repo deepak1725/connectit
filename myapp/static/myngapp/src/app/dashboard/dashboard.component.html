@@ -134,9 +134,8 @@
 										</thead>
 
 										<tbody>
-											<ng-container *ngFor="let notification of userData?.notificationsData; index as i">
 
-												<tr>
+												<tr *ngFor="let notification of userData?.notificationsData; index as i">
 													<td>
 														<span class="text-muted">{{i+1}}</span>
 													</td>
@@ -148,7 +147,7 @@
 													</td>
 													<ng-template #otherBlock>
 														<td>
-														Stream Notification																
+															Stream Notification																
 														</td>
 													</ng-template>
 													
@@ -157,12 +156,17 @@
 													</td>
 													
 													<td>
-														{{notification.sent_on | date}}
+														{{ notification.sent_on | date }}
 													</td>
 										
 												</tr>
-											</ng-container>
 
+												<tr *ngIf="userData?.notificationsData.length == 0">
+													<td colspan="5" style="text-align: center;">
+														No Data
+													</td>
+												
+												</tr>
 											
 											
 

@@ -29,7 +29,6 @@ export class UserService {
 
   public handleError = (error: Response) => {
 
-    console.log(error, "error2");
     return Observable.throw(error)
   }
 

@@ -156,12 +156,8 @@ class UserDetailsView(LoginRequiredMixin, FormView):
 
 class GetUserDetailsApi(APIView):
     permission_classes = ''
-    authentication_classes = ''
 
     def get(self, request, format=None):
-        # TODO: remove this
-        user = User.objects.get(email__exact='sharma1725@gmail.com')
-        login(request, user, 'django.contrib.auth.backends.ModelBackend')
 
         userSocial = UserSocialAuth.objects.filter(user_id = request.user.id).first()
         mySocialAuth = SocialAuth.objects.filter( user_id = request.user.id).first()
