@@ -1,8 +1,9 @@
 {% extends 'layout.html' %}
 {% load staticfiles %}
-{% block title %} Welcome to ConnectItt {% endblock title %}
+{% block title %} Welcome to ConnectIt {% endblock title %}
 
 {% block css %}
+    <link href="{% static 'myngapp/dist/styles.13e623bb24f4b49cb719.bundle.css' %}" rel="stylesheet"/>
 {% endblock css %}
 
 {% block content %}
@@ -13,9 +14,7 @@
 
 
 {% block js %}
-    <script type="text/javascript" src="{% static 'myngapp/dist/inline.bundle.js' %}"></script>
-    <script type="text/javascript" src="{% static 'myngapp/dist/polyfills.bundle.js' %}"></script>
-    <script type="text/javascript" src="{% static 'myngapp/dist/styles.bundle.js' %}"></script>
-    <script type="text/javascript" src="{% static 'myngapp/dist/vendor.bundle.js' %}"></script>
-    <script type="text/javascript" src="{% static 'myngapp/dist/main.bundle.js' %}"></script>
+    <script type="text/javascript" src="{% static 'myngapp/dist/inline.318b50c57b4eba3d437b.bundle.js' %}"></script>
+    <script type="text/javascript" src="{% static 'myngapp/dist/polyfills.013e0b7434099f69c84d.bundle.js' %}"></script>
+    <script type="text/javascript" src="{% static 'myngapp/dist/main.250487b3fd13afc46608.bundle.js' %}"></script>
 {% endblock js %}
