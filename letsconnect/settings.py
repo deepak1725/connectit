@@ -173,3 +173,4 @@ EMAIL_HOST_USER = 'sharma1725'
 EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_KEY')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
