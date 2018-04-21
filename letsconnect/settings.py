@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'myapp',
     'social_django',
     'django_cron',
+    'rest_framework',
 ]
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.open_id.OpenIdAuth',
@@ -177,3 +178,12 @@ EMAIL_USE_TLS = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}

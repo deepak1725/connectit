@@ -18,7 +18,7 @@
 
 	<!-- Generated: 2018-04-15 11:27:52 +0530 -->
 
-	<title>Homepage - tabler.github.io - a responsive, flat and full featured admin template</title>
+	<title>Dashboard</title>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
@@ -46,14 +46,13 @@
 
 						<div class="d-flex order-lg-2 ml-auto">
 							<div class="nav-item d-md-flex">
-								<a href="#" class="btn btn-sm btn-outline-primary" target="_blank">Sign out</a>
+								<a href="/logout" class="btn btn-sm btn-outline-primary" target="_blank">Sign out</a>
 							</div>
 							
 								<a href="#" class="nav-link pr-0 leading-none" >
 									<span class="avatar"><i class="fa fa-user" aria-hidden="true"></i></span>
 									<span class="ml-2 d-none d-lg-block">
-										<span class="text-default">Jane Pearson</span>
-										<small class="text-muted d-block mt-1">Administrator</small>
+										<span class="text-default">{{ userData?.username }}</span>
 									</span>
 								</a>
 								
@@ -81,8 +80,8 @@
 							<div class="card">
 								<div class="card-body p-3 text-center">
 									
-									<div class="h1 m-0">0</div>
-									<div class="text-muted mb-4">Email Notification Sent</div>
+									<div class="h1 m-0">{{userData?.totalUserFollowEmails}}</div>
+									<div class="text-muted mb-4">Follow Notification Sent</div>
 								</div>
 							</div>
 						</div>
@@ -90,8 +89,8 @@
 							<div class="card">
 								<div class="card-body p-3 text-center">
 									
-									<div class="h1 m-0">0</div>
-									<div class="text-muted mb-4">Text Notification Sent</div>
+									<div class="h1 m-0">{{userData?.totalStreamEmails}}</div>
+									<div class="text-muted mb-4">Stream Notification Sent</div>
 								</div>
 							</div>
 						</div>
@@ -99,7 +98,7 @@
 							<div class="card">
 								<div class="card-body p-3 text-center">
 									
-									<div class="h1 m-0">Twitch</div>
+									<div class="h1 m-0">{{userData?.connectedThrough}}</div>
 									<div class="text-muted mb-4">Connected Through</div>
 								</div>
 							</div>
@@ -108,7 +107,7 @@
 							<div class="card">
 								<div class="card-body p-3 text-center">
 									
-									<div class="h1 m-0">23 -Jun -2018</div>
+									<div class="h1 m-0">{{userData?.membersince | date}}</div>
 									<div class="text-muted mb-4">Member Since</div>
 								</div>
 							</div>
@@ -128,52 +127,43 @@
 											<tr>
 												<th class="w-1">No.</th>
 												<th>Subject</th>
-												<th>Text Notification</th>
-												<th>Email Notification</th>
+												<th>Type</th>
+												<th>Mode</th>
 												<th>Sent on</th>
 											</tr>
 										</thead>
 
 										<tbody>
+											<ng-container *ngFor="let notification of userData?.notificationsData; index as i">
 
-											<tr>
-												<td>
-													<span class="text-muted">1</span>
-												</td>
-												<td>
-													User Comes Online
-												</td>
-												<td>
-													<span class="status-icon bg-secondary"></span> Not Sent
-												</td>
-												<td>
-													<span class="status-icon bg-success"></span> Delivered
-												</td>
-												<td>
-													15 Dec 2017
-												</td>
-									
-											</tr>
+												<tr>
+													<td>
+														<span class="text-muted">{{i+1}}</span>
+													</td>
+													<td>
+														{{notification.subject}}
+													</td>
+													<td *ngIf="notification.notification_about == followNotification; else otherBlock">
+														Follow Notification
+													</td>
+													<ng-template #otherBlock>
+														<td>
+														Stream Notification																
+														</td>
+													</ng-template>
+													
+													<td>
+														<span class="status-icon bg-success"></span>Email
+													</td>
+													
+													<td>
+														{{notification.sent_on | date}}
+													</td>
+										
+												</tr>
+											</ng-container>
 
-											<tr>
-												<td>
-													<span class="text-muted">2</span>
-												</td>
-												<td>
-													User Starts Streaming
-												</td>
-												<td>
-													<span class="status-icon bg-secondary"></span> Not Sent
-												</td>
-												<td>
-													<span class="status-icon bg-success"></span> Delivered
-												</td>
-												<td>
-													12 Apr 2017
-												</td>
-									
-											</tr>
-
+											
 											
 
 										</tbody>

@@ -24,7 +24,7 @@ export const APPROUTES: Routes = [
 @NgModule({
     imports: [
         RouterModule.forRoot(APPROUTES,
-            { enableTracing: true }
+            { enableTracing: false }
         )
     ],
     exports: [

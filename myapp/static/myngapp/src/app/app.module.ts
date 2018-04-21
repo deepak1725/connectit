@@ -8,7 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-
+import {HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +18,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     BrowserAnimationsModule,
     AppRoutingModule,
 

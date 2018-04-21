@@ -15,13 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from myapp.views import IndexView, LoginView,UserDetailsView, FollowerCallbackView, StreamCallbackView
+from myapp.views import IndexView, LoginView,UserDetailsView, FollowerCallbackView, StreamCallbackView, GetUserDetailsApi
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'^$', IndexView.as_view(), name='home'),
     url(r'^index/$', IndexView.as_view(), name='index'),
     url(r'^login/$', LoginView.as_view(), name="login"),
+    url(r'^logout/$', auth_views.logout, {'next_page': '/'},name='logout'),
     url(r'^user-details/$', UserDetailsView.as_view(), name="details"),
     url(r'^callback/follower/$', FollowerCallbackView.as_view(), name="follower"),
     url(r'^callback/stream/$', StreamCallbackView.as_view(), name="stream"),
+    url(r'^api/user/$', GetUserDetailsApi.as_view(), name="fetchdetails"),
+
 ]

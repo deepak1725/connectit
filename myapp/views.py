@@ -11,6 +11,12 @@ from django.conf import settings
 from social_django.models import UserSocialAuth
 from django.http import HttpResponse
 from myapp.email import SendEmail
+from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth import authenticate, login
 
 
 
@@ -139,3 +145,53 @@ class UserDetailsView(LoginRequiredMixin, FormView):
 
 
         return super().form_valid(form)
+
+
+
+"""
+
+    ------------------------------  API  -----------------------
+
+"""
+
+class GetUserDetailsApi(APIView):
+    permission_classes = ''
+    authentication_classes = ''
+
+    def get(self, request, format=None):
+        # TODO: remove this
+        user = User.objects.get(email__exact='sharma1725@gmail.com')
+        login(request, user, 'django.contrib.auth.backends.ModelBackend')
+
+        userSocial = UserSocialAuth.objects.filter(user_id = request.user.id).first()
+        mySocialAuth = SocialAuth.objects.filter( user_id = request.user.id).first()
+
+        notifications = mySocialAuth.social_auth.select_related().order_by('-created')
+        totalStreamEmails = notifications.filter(notification_about = 1).count()
+        totalUserFollowEmails = notifications.filter(notification_about = 2).count()
+
+        notificationsData = []
+        for notification in notifications.all():
+            data = {
+                'id' : notification.id,
+                'subject' : notification.subject,
+                'notification_about' : notification.notification_about,
+                'sent_on' : notification.created
+            }
+            notificationsData.append(data)
+
+        payload = {
+            'username' : request.user.username,
+            'connectedThrough' : userSocial.provider.title(),
+            'membersince': mySocialAuth.created,
+            'totalStreamEmails': totalStreamEmails,
+            'totalUserFollowEmails': totalUserFollowEmails,
+            'notificationsData': notificationsData
+        }
+
+        responseData = {
+            'message': 'Details Successfuly fetched',
+            'data': payload,
+            'error': None
+        }
+        return Response(responseData, status=status.HTTP_200_OK)
