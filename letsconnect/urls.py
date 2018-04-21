@@ -22,5 +22,5 @@ urlpatterns = [
     url(r'^', include('social_django.urls', namespace='social')),
     url(r'^', include(('myapp.urls','myapp'), namespace='myapp')),
     url(r'^admin/', admin.site.urls),
-]
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
