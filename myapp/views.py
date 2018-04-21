@@ -20,16 +20,9 @@ class IndexView(LoginRequiredMixin, TemplateView):
 
 
 
+
 class LoginView(TemplateView):
     template_name = "myapp/login.html"
-
-    def get(self, request, *args, **kwargs):
-
-        if request.user.is_authenticated:
-            return redirect('index')
-
-        return render(request, self.template_name,{})
-
 
 
 class FollowerCallbackView(View):
@@ -128,7 +121,7 @@ class UserDetailsView(LoginRequiredMixin, FormView):
 
             # Follower Payload
             followerPayload = {
-                "hub.callback" : self.request.build_absolute_uri(reverse('follower')),
+                "hub.callback" : self.request.build_absolute_uri(reverse('myapp:follower')),
                 "hub.mode" : "subscribe",
                 "hub.topic" : "https://api.twitch.tv/helix/users/follows?first=1&to_id={0}".format(authUser.uid)
             }
@@ -138,7 +131,7 @@ class UserDetailsView(LoginRequiredMixin, FormView):
 
             # Stream Payload
             streamPayload = {
-                "hub.callback": self.request.build_absolute_uri(reverse('stream')),
+                "hub.callback": self.request.build_absolute_uri(reverse('myapp:stream')),
                 "hub.mode": "subscribe",
                 "hub.topic": "https://api.twitch.tv/helix/streams?user_id={0}".format(authUser.uid)
             }

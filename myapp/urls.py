@@ -18,7 +18,10 @@ from django.contrib import admin
 from myapp.views import IndexView, LoginView,UserDetailsView, FollowerCallbackView, StreamCallbackView
 
 urlpatterns = [
-    url(r'^', include('social_django.urls', namespace='social')),
-    url(r'^', include(('myapp.urls','myapp'), namespace='myapp')),
-    url(r'^admin/', admin.site.urls),
+    url(r'^$', IndexView.as_view(), name='home'),
+    url(r'^index/$', IndexView.as_view(), name='index'),
+    url(r'^login/$', LoginView.as_view(), name="login"),
+    url(r'^user-details/$', UserDetailsView.as_view(), name="details"),
+    url(r'^callback/follower/$', FollowerCallbackView.as_view(), name="follower"),
+    url(r'^callback/stream/$', StreamCallbackView.as_view(), name="stream"),
 ]
