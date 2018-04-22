@@ -1,0 +1,21 @@
+language: python
+python:
+  - "3.6"
+
+install:
+    - pip install -r requirements.txt
+sudo: false
+
+env:
+  - CONNECTIT
+
+services:
+  - postgresql
+
+script: ./manage.py
+
+before_script:
+  - psql -c 'create database connectit;' -U postgres
+
+notifications:
+  email: false
