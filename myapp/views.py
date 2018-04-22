@@ -34,6 +34,12 @@ class FollowerCallbackView(View):
 
     def get(self, request):
         challenge = request.GET.get("hub.challenge", None)
+        emailData = {}
+        emailData['subject'] = "Welcome to Connectit | Successfully Subscribed"
+        emailData['content'] = "Somebody on roll"
+        emailData['userEmail'] = "sharma1725@gmail.com"
+        email = SendEmail.send(emailData)
+
         return HttpResponse(challenge, status=200)
 
 
@@ -68,10 +74,11 @@ class GetUserEmail():
 class StreamCallbackView(View):
     def get(self, request):
         challenge = request.GET.get("hub.challenge", None)
+        email = request.GET.get("email", None)
         emailData = {}
-        emailData['subject'] = "Webhook Activated"
-        emailData['content'] = "Somebody is on roll"
-        emailData['userEmail'] = "sharma1725@gmail.com"
+        emailData['subject'] = "Welcome to Connectit | Successfully Subscribed"
+        emailData['content'] = "We are glad that you came. Your subscription is successfully activated."
+        emailData['userEmail'] = email
         email = SendEmail.send(emailData)
 
         return HttpResponse(challenge, status=200)
@@ -134,7 +141,9 @@ class UserDetailsView(LoginRequiredMixin, FormView):
             followerPayload = {
                 "hub.callback" : self.request.build_absolute_uri(reverse('myapp:follower')),
                 "hub.mode" : "subscribe",
-                "hub.topic" : "https://api.twitch.tv/helix/users/follows?first=1&to_id={0}".format(authUser.uid)
+                "hub.topic" : "https://api.twitch.tv/helix/users/follows?first=1&to_id={0}".format(authUser.uid),
+                "hub.lease_seconds": 864000, #10 Days,
+                "email": self.request.user.email
             }
             
             url = "https://api.twitch.tv/helix/webhooks/hub"
@@ -144,7 +153,9 @@ class UserDetailsView(LoginRequiredMixin, FormView):
             streamPayload = {
                 "hub.callback": self.request.build_absolute_uri(reverse('myapp:stream')),
                 "hub.mode": "subscribe",
-                "hub.topic": "https://api.twitch.tv/helix/streams?user_id={0}".format(authUser.uid)
+                "hub.topic": "https://api.twitch.tv/helix/streams?user_id={0}".format(authUser.uid),
+                "hub.lease_seconds": 864000, #10 Days
+                "email": self.request.user.email
             }
             response = requests.post(url, data=streamPayload, headers=headers)
 

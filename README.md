@@ -29,4 +29,6 @@ b) When his stream successfully goes up/down
 
 ## Misc:
 1. The Project is also hosted on Heroku and live Demo is available at [Live Demo](https://letsconnectit.herokuapp.com)
+2. Currently Subscription lasts for 10 days, if you need to continue subscription you need to re-subscribe it, or put a issue above there, and we together can automate this thing.
 
+### Enjoy!! Do Star it. :)
