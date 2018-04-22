@@ -174,6 +174,7 @@ EMAIL_HOST_USER = os.environ.get('SENDGRID_USER', 'sharma1725')
 EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_KEY')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+ADMINS = [('Deepak Sharma', 'admin@connectit.com')]
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
