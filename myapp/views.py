@@ -74,13 +74,6 @@ class GetUserEmail():
 class StreamCallbackView(View):
     def get(self, request):
         challenge = request.GET.get("hub.challenge", None)
-        email = request.GET.get("email", None)
-        emailData = {}
-        emailData['subject'] = "Welcome to Connectit | Successfully Subscribed"
-        emailData['content'] = "We are glad that you came. Your subscription is successfully activated."
-        emailData['userEmail'] = email
-        email = SendEmail.send(emailData)
-
         return HttpResponse(challenge, status=200)
 
 
@@ -143,7 +136,6 @@ class UserDetailsView(LoginRequiredMixin, FormView):
                 "hub.mode" : "subscribe",
                 "hub.topic" : "https://api.twitch.tv/helix/users/follows?first=1&to_id={0}".format(authUser.uid),
                 "hub.lease_seconds": 864000, #10 Days,
-                "email": self.request.user.email
             }
             
             url = "https://api.twitch.tv/helix/webhooks/hub"
@@ -155,14 +147,20 @@ class UserDetailsView(LoginRequiredMixin, FormView):
                 "hub.mode": "subscribe",
                 "hub.topic": "https://api.twitch.tv/helix/streams?user_id={0}".format(authUser.uid),
                 "hub.lease_seconds": 864000, #10 Days
-                "email": self.request.user.email
             }
             response = requests.post(url, data=streamPayload, headers=headers)
-
+            self.confirmUser(self.request.user.email)
 
         return super().form_valid(form)
 
 
+    def confirmUser(self, email):
+        emailData = {}
+        emailData['subject'] = "Welcome to Connectit | Successfully Subscribed"
+        emailData['content'] = "We are glad that you came. Your subscription is successfully activated."
+        emailData['userEmail'] = email
+        emailIt = SendEmail.send(emailData)
+        return
 
 """
 
