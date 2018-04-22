@@ -46,34 +46,37 @@
 
                       <fieldset class="form-fieldset">
                             <div class="form-group">
-                                {{ form.name.errors }}
+
 
                               <label class="form-label" for="{{ form.field.name }}">
                                   {{ form.name.label }}
                                   <span class="form-required">*</span>
                                   {{ form.name }}
                               </label>
+                                {{ form.name.errors.as_text }}
                             </div>
 
 
                             <div class="form-group">
-                                {{ form.email.errors }}
+
 
                               <label class="form-label" for="{{ form.field.email }}">
                                   {{ form.email.label }}
                                   <span class="form-required">*</span>
                                   {{ form.email }}
                               </label>
+                                {{ form.email.errors.as_text }}
                             </div>
 
 
                             <div class="form-group">
-                                {{ form.mobile.errors }}
+
 
                               <label class="form-label" for="{{ form.field.mobile }}">
                                   {{ form.mobile.label }}
                                   {{ form.mobile }}
                               </label>
+                                {{ form.mobile.errors.as_text }}
                             </div>
 
 
