@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'social_django',
-    'django_cron',
     'rest_framework',
 ]
 AUTHENTICATION_BACKENDS = (
@@ -162,11 +161,7 @@ SOCIAL_AUTH_TWITCH_KEY = os.environ.get('TWITCH_DEV_KEY', 'hn9wdfmenh2m4g0d1zwen
 SOCIAL_AUTH_TWITCH_SECRET = os.environ.get('TWITCH_DEV_SECRET')
 # SOCIAL_AUTH_TWITCH_SCOPE = ['openid']
 
-ALLOW_PARALLEL_RUNS = True
-CRON_CLASSES = [
-    "myapp.cron.OnlineStreamCheckCronJob",
-    "myapp.cron.NewFollowerCheckCronJob",
-]
+
 DEFAULT_FROM_EMAIL = 'admin@connectit.com'
 
 EMAIL_HOST = 'smtp.sendgrid.net'
