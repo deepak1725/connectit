@@ -7,7 +7,7 @@ class SendEmail():
             subject=data['subject'],
             message=data['content'],
             from_email='admin@connectit.com',
-            recipient_list=["sharma1725@gmail.com", data["userEmail"]],
+            recipient_list=[data["userEmail"]],
             fail_silently=False
         )
         return

@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 # Settings Table
 class SocialAuth(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    mobile = models.IntegerField(null=True, blank=True)
+    mobile = models.CharField(max_length=10, null=True, blank=True)
     email_notifications = models.BooleanField()
     text_notifications = models.BooleanField(default=False)
     followers = models.TextField(default=[])

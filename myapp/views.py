@@ -17,7 +17,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import authenticate, login
-
+import os
 
 
 
@@ -29,7 +29,6 @@ class IndexView(LoginRequiredMixin, TemplateView):
 
 class LoginView(TemplateView):
     template_name = "myapp/login.html"
-
 
 class FollowerCallbackView(View):
 
@@ -69,6 +68,12 @@ class GetUserEmail():
 class StreamCallbackView(View):
     def get(self, request):
         challenge = request.GET.get("hub.challenge", None)
+        emailData = {}
+        emailData['subject'] = "Webhook Activated"
+        emailData['content'] = "Somebody is on roll"
+        emailData['userEmail'] = "sharma1725@gmail.com"
+        email = SendEmail.send(emailData)
+
         return HttpResponse(challenge, status=200)
 
 
@@ -131,7 +136,7 @@ class UserDetailsView(LoginRequiredMixin, FormView):
                 "hub.mode" : "subscribe",
                 "hub.topic" : "https://api.twitch.tv/helix/users/follows?first=1&to_id={0}".format(authUser.uid)
             }
-
+            
             url = "https://api.twitch.tv/helix/webhooks/hub"
             response = requests.post(url, data=followerPayload, headers=headers)
 

@@ -158,8 +158,8 @@ SOCIAL_AUTH_TWITCH_PIPELINE = (
 
 )
 
-SOCIAL_AUTH_TWITCH_KEY = 'hn9wdfmenh2m4g0d1zwenonvq4yexi'
-SOCIAL_AUTH_TWITCH_SECRET = 'xhs8ke9ocnbnvbtd6zcm1wguya00uw'
+SOCIAL_AUTH_TWITCH_KEY = os.environ.get('TWITCH_DEV_KEY', 'hn9wdfmenh2m4g0d1zwenonvq4yexi')
+SOCIAL_AUTH_TWITCH_SECRET = os.environ.get('TWITCH_DEV_SECRET')
 # SOCIAL_AUTH_TWITCH_SCOPE = ['openid']
 
 ALLOW_PARALLEL_RUNS = True
@@ -170,7 +170,7 @@ CRON_CLASSES = [
 DEFAULT_FROM_EMAIL = 'admin@connectit.com'
 
 EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'sharma1725'
+EMAIL_HOST_USER = os.environ.get('SENDGRID_USER', 'sharma1725')
 EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_KEY')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
