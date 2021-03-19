@@ -6,7 +6,7 @@ dj-static==0.0.6
 Django==2.0.4
 django-common-helpers==0.9.1
 django-heroku==0.3.1
-djangorestframework==3.8.2
+djangorestframework==3.11.2
 gunicorn==19.7.1
 idna==2.6
 oauthlib==2.0.7
